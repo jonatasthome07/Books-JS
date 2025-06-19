@@ -9,6 +9,15 @@ app.use(express.static("public"))
 app.engine("handlebars", exphbs.engine())
 app.set("view engine","handlebars")
 
+app.post("/allbooks", (req,res)=>{
+    
+    res.render("allbooks")
+})
+
+app.get("/addbooks", (req,res)=>{
+    res.render("addbooks")
+})
+
 
 app.get("/", (req,res)=>{
     res.render("home")
