@@ -2,12 +2,10 @@ const pool = require("./db/conn.js")
 const express = require("express")
 const app = express()
 const exphbs = require("express-handlebars")
-require ("dotenv").config();
 
 //Set Engine
 app.engine("handlebars", exphbs.engine())
 app.set("view engine","handlebars")
-
 
 //Middlewares
 app.use(express.urlencoded({
@@ -16,17 +14,17 @@ app.use(express.urlencoded({
 app.use(express.json())
 app.use(express.static("public"))
 
-
 //Routes
-app.post("/allbooks", (req,res)=>{
-    
-    res.render("allbooks")
+app.get("/books", (req,res)=>{
+    const sql = `SELECT * FROM books`
+    pool.query(sql, (err,data)=>{
+        if(err){
+            console.log(err)
+        }
+        const books = data
+        res.render("books", { books })
+    }) 
 })
-
-app.get("/addbooks", (req,res)=>{
-    res.render("addbooks")
-})
-
 
 app.get("/", (req,res)=>{
     res.render("home")
