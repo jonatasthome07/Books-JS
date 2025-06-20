@@ -15,6 +15,19 @@ app.use(express.json())
 app.use(express.static("public"))
 
 //Routes
+app.get("/books", (req,res)=>{
+    
+    const sql = `SELECT * FROM books`
+    pool.query(sql, (err,data)=>{
+        if(err){
+            console.log(err)
+        }
+        const books = data
+        res.render("books", {books})
+    })
+})
+
+
 app.get("/addbooks", (req,res)=>{
     res.render("addbooks")
 })
