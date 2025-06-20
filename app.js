@@ -15,15 +15,38 @@ app.use(express.json())
 app.use(express.static("public"))
 
 //Routes
-app.get("/books", (req,res)=>{
+app.get("/allbooks", (req,res)=>{
     const sql = `SELECT * FROM books`
     pool.query(sql, (err,data)=>{
         if(err){
             console.log(err)
         }
         const books = data
-        res.render("books", { books })
+        res.render("allbooks", { books })
     }) 
+})
+
+app.get("/books",(req,res)=>{
+    res.render("books")
+})
+
+app.get("/addbooks", (req, res) => {
+  res.render("addbooks");
+});
+
+app.post("/addbooks",(req,res)=>{
+    const name = req.body.name
+    const pages = req.body.pages
+    const sql = `INSERT INTO books (name,pageqty) VALUES(?,?)`
+    const data = [name, pages]
+
+    pool.query(sql,data, (err)=>{
+        if(err){
+            console.log(err)
+        }
+    })
+
+    res.redirect("/books")
 })
 
 app.get("/", (req,res)=>{
