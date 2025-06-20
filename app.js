@@ -57,6 +57,19 @@ app.post("/editbook/:id", (req,res)=>{
     })
 })
 
+app.post("/deletebook/:id", (req,res)=>{
+    const id = req.params.id
+    const sql = `DELETE FROM books WHERE id = ?`
+    const data = [id]
+    
+    pool.query(sql, data, (err)=>{
+        if(err){
+            console.log(err)
+        }
+        res.redirect("/books")
+    })
+})
+
 app.post("/addbooks", (req,res)=>{
     const name = req.body.name
     const pageqty = req.body.pageqty
