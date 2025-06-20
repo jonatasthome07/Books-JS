@@ -18,3 +18,16 @@ a{
 a:hover{
     color:purple;
 }
+
+.form-container{
+    margin: 150px auto;
+}
+
+.form-container input{
+    margin-top: 10px;
+    padding: 7px;
+}
+
+.form-container h1{
+    padding-bottom: 10px;
+}
