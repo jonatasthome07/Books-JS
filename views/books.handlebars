@@ -1,5 +1,5 @@
 <h1>All books in our store:</h1>
 {{#each books}}
-<p>{{this.id}} - {{this.name}} - Pages quantity: {{this.pageqty}}</p>
+<p><a href="/editbook/{{this.id}}">{{this.id}}- {{this.name}} - Pages quantity: {{this.pageqty}}</p></a>
 {{/each}}
 <a href="/">Click here to go back to home</a>

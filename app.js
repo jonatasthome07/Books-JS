@@ -27,10 +27,22 @@ app.get("/books", (req,res)=>{
     })
 })
 
-
 app.get("/addbooks", (req,res)=>{
     res.render("addbooks")
 })
+
+app.get("/editbook/:id", (req,res)=>{
+    const id = req.params.id
+    const sql = `SELECT * FROM books WHERE id = ${id}`
+    pool.query(sql,(err,data)=>{
+        if(err){
+            console.log(err)
+        }
+        const book = data[0]
+        res.render("editbook", {book})
+    })
+})
+
 
 app.post("/addbooks", (req,res)=>{
     const name = req.body.name
